@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Client } from 'src/app/model/Client.model';
 import { ClientServiceService } from 'src/app/services/client-service.service';
 
@@ -26,6 +27,8 @@ export class AfficherClientsComponent implements OnInit {
     this.searchValue = '';
     this.search();
   }
+
+ 
 
   search(): void {
     this.visible = false;

@@ -4,13 +4,13 @@
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Nom</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-        <input nz-input formControlName="nom" id="email" />
+        <input nz-input formControlName="nom" id="nom" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Prenom</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-          <input nz-input formControlName="prenom" id="email" />
+          <input nz-input formControlName="prenom" id="prenom" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -21,9 +21,8 @@
             formControlName="sexe"
             nzPlaceHolder="Selectionner le sexe"
           >
-            <nz-option nzValue="Homme" nzLabel="Homme"></nz-option>
-            <nz-option nzValue="Femme" nzLabel="Femme"></nz-option>
-            <nz-option nzValue="Autre" nzLabel="Autre"></nz-option>
+            <nz-option nzValue="M" nzLabel="M"></nz-option>
+            <nz-option nzValue="Mme" nzLabel="Mme"></nz-option>
 
           </nz-select>
         </nz-form-control>
@@ -31,19 +30,19 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Pays d'adresse</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-          <input nz-input formControlName="pays_d_adresse" id="email" />
+          <input nz-input formControlName="pays_d_adresse" id="pays_d_adresse" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Adresse legale</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-          <input nz-input formControlName="adresselegale" id="email" />
+          <input nz-input formControlName="adresselegale" id="adresselegale" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Ville</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-          <input nz-input formControlName="ville" id="email" />
+          <input nz-input formControlName="ville" id="ville" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -67,7 +66,7 @@
               <nz-option nzLabel="+212" nzValue="+212"></nz-option>
             </nz-select>
           </ng-template>
-          <input formControlName="telephone" id="'phoneNumber'" nz-input />
+          <input formControlName="telephone" id="telephone" nz-input />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
@@ -82,7 +81,7 @@
       <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Montant</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-          <input nz-input formControlName="montant" id="email" />
+          <input nz-input formControlName="montant" id="montant" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>

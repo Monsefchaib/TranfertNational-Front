@@ -29,6 +29,7 @@ export class AjouterAgentComponent implements OnInit {
   };
   onChange(result: Date): void {
     console.log('onChange: ', result);
+    this.date=result;
   }
 
   submitForm(): void {
@@ -60,7 +61,7 @@ export class AjouterAgentComponent implements OnInit {
   };
 
 
-  constructor(private clientService:ClientServiceService,private fb: FormBuilder,private thoast:ToastrService) {}
+  constructor(private clientService:ClientServiceService,private fb: FormBuilder) {}
   ajouterCompte(){
     this.nbrComptes++;
   }
@@ -75,7 +76,7 @@ export class AjouterAgentComponent implements OnInit {
     this.agent.adresselegale=agentValue['adresselegale'];
     this.agent.email=agentValue['email'];
     this.agent.ville=agentValue['ville'];
-    this.agent.type=agentValue['type'];
+    // this.agent.type=agentValue['type'];
     // if(agentValue['numero'].length>1){
     //   console.log("piece saisie")
     //   var p=new PieceIdentite();
@@ -90,13 +91,11 @@ export class AjouterAgentComponent implements OnInit {
       console.log("compte ajoute")
       this.agent.comptes=[];
       const compteValue=this.agentForm.controls.comptes?.value;
-      for(let compte of compteValue){
         var nvCompte =new Compte();
-        nvCompte.montant=compte['montant'];
-        nvCompte.date_ouverture=compte['date_ouverture'];
-        nvCompte.type=compte['type'];
+        nvCompte.montant=agentValue['montant'];
+        nvCompte.date_ouverture=this.date;
         this.agent.comptes.push(nvCompte);
-      }
+    
     }
     if(this.nbrCartes>0){
       console.log("wallet ajoute")
@@ -126,7 +125,7 @@ export class AjouterAgentComponent implements OnInit {
     this.clientService.addAgent(this.agent).subscribe((d)=>{
       console.log("rerponse"+d);
     })
-    this.thoast.success("agent Ajouté","Succes")
+    // this.thoast.success("agent Ajouté","Succes")
 }
   ngOnInit(): void {
     this.agentForm = this.fb.group({

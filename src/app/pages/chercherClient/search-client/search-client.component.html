@@ -11,7 +11,8 @@
   </nz-input-group>
   <ng-template #suffixIconSearch>
     <i nz-icon nzType="search"></i>
+   
   </ng-template>
-    <nz-autocomplete [nzDataSource]="filteredOptions" #auto></nz-autocomplete>
+    <nz-autocomplete (selectionChange)="destroyModal($event)" [nzDataSource]="filteredOptions" #auto  ></nz-autocomplete>
          </nz-form-control>
         </nz-form-item>

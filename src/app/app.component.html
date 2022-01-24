@@ -12,7 +12,7 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Transfert National" nzIcon="dashboard">
+      <!-- <li nz-submenu nzOpen nzTitle="Transfert National" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/ajouterTransfert">Ajouter un transfert</a>
@@ -24,14 +24,14 @@
             <a>Workplace</a>
           </li>
         </ul>
-      </li>
+      </li> -->
       <li nz-submenu nzOpen nzTitle="Transferts" nzIcon="send">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/transfert/all">Afficher les transferts</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Ajouter un transfert</a>
+            <a routerLink="/transfert/add">Ajouter un transfert</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>Consulter un transfert</a>
