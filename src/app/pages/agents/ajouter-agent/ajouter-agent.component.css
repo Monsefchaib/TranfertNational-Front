@@ -9,3 +9,8 @@
   .register-are {
     margin-bottom: 8px;
   }
+
+  nz-date-picker {
+    margin: 0 8px 12px 0;
+    width: 350px;
+  }
