@@ -25,10 +25,133 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="Transferts" nzIcon="send">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+            <a routerLink="/transfert/all">Afficher les transferts</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Ajouter un transfert</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter un transfert</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Agents" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/agents/all">Afficher agents</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/agents/add">Ajouter agent</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter agent</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Beneficiaires" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/beneficiaire/all">Afficher beneficiaires</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/beneficiaire/add" >Ajouter beneficiaire</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter beneficiaire</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Cartes de credit" nzIcon="credit-card">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/cartecredit/all">Afficher carte de credit</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/cartecredit/add">Ajouter carte de credit</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter carte de credit</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Clients" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/client/all">Afficher clients</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/client/add">Ajouter client</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Afficher clients</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Comptes" nzIcon="audit">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/compte/all">Afficher comptes</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Ajouter compte</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter compte</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Emetteurs" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/emetteur/all">Afficher emetteurs</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Ajouter emetteur</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter emetteur</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Gichets a billets" nzIcon="money-collect">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/gichet/all">Afficher gichets a billets</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/gichet/add">Ajouter gichets a billet</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter gichets a billet</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Points de ventes" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/pointvente/all">Afficher les points de ventes</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/pointvente/add">Ajouter un point de ventes</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter un point de ventes</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Wallets" nzIcon="wallet">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/wallet/all">Afficher les wallets</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/wallet/add">Ajouter une wallet</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Consulter une wallet</a>
           </li>
         </ul>
       </li>
