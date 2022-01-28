@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Client } from 'src/app/model/Client.model';
+import { Emetteur } from 'src/app/model/Emetteur.model';
 import { ClientServiceService } from 'src/app/services/client-service.service';
 
 @Component({
@@ -29,8 +30,8 @@ export class SearchClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let resp=this.clientService.getClients();
-    resp.subscribe((data :Client[])=>{
+    let resp=this.clientService.getEmetteurs();
+    resp.subscribe((data :Emetteur[])=>{
       this.listClients=data;
       const arr =this.listClients.filter(item => item.profession !== "Agent");
 

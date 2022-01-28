@@ -1,39 +1,52 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { Beneficiaire } from 'src/app/model/Beneficiare.model';
+import { concatMap } from 'rxjs/operators';
 import { Client } from 'src/app/model/Client.model';
+import { Emetteur } from 'src/app/model/Emetteur.model';
 import { Transfert } from 'src/app/model/Transfert.model';
+import { ClientServiceService } from 'src/app/services/client-service.service';
 import { AjouterBeneficiaireComponent } from '../../ajouter-beneficiaire/ajouter-beneficiaire.component';
 import { SearchClientComponent } from '../../chercherClient/search-client/search-client.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-ajouter-transfert',
   templateUrl: './ajouter-transfert.component.html',
   styleUrls: ['./ajouter-transfert.component.css']
 })
 export class AjouterTransfertComponent implements OnInit {
+  dateToday=new Date();
+  notifier=false;
   tplModalButtonLoading = false;
   disabled = false;
   isVisible = false;
   validateForm!: FormGroup;
   checked = true;
   inputValue?: string;
+  beneficiaire:Beneficiaire=new Beneficiaire();
   filteredOptions: string[] = [];
-  selectedClient:Client = new Client();
+  selectedEmetteur:Emetteur = new Emetteur();
+  selectedBenef:Beneficiaire=new Beneficiaire();
   transfert:Transfert = new Transfert();
-  options = ['Burns Bay Road', 'Downing Street', 'Wall Street'];
-  constructor(private fb: FormBuilder,private drawerService: NzDrawerService,private viewContainerRef: ViewContainerRef,private modal: NzModalService) { 
+
+  options = [];
+  constructor(private router: Router,private message: NzMessageService,private clientService:ClientServiceService,private fb: FormBuilder,private drawerService: NzDrawerService,private viewContainerRef: ViewContainerRef,private modal: NzModalService) { 
     this.filteredOptions = this.options;
 
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      client:[{value:this.selectedClient.nom,disabled:true}, [Validators.required],],
+      client:[{value:this.selectedEmetteur.nom,disabled:true}, [Validators.required],],
       type: [null, [Validators.required]],
       montant: [null, [Validators.required,this.checkMontant]],
       frais: [null, [Validators.required]],
-      otp:[null, [Validators.required]]
+      motif:[null, [Validators.required]],
+      notifier:[false],
+      // otp:[null, [Validators.required]]
     });
   }
   checkMontant = (control: FormControl): { [s: string]: boolean } => {
@@ -44,11 +57,36 @@ export class AjouterTransfertComponent implements OnInit {
     }
     return {};
   };
+  
+  notifierr(){
+    console.log('checked');
+    this.notifier=!this.notifier;
+    console.log(this.notifier)
+  }
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      const id = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+      setTimeout(() => {
+        this.message.remove(id);
+      }, 2500);
+
       this.transfert=this.validateForm.value;
-      
+      this.transfert.date_demission=this.dateToday;
+      this.transfert.beneficiaire=this.selectedBenef;
+      this.transfert.emetteur=this.selectedEmetteur;
+      this.transfert.montant_transfert=this.validateForm.value['montant'];
+      this.transfert.notification=this.validateForm.value['notifier'];
+      this.transfert.delai_de_validite=this.dateToday;
+      this.transfert.delai_de_validite.setDate(this.transfert.delai_de_validite.getDate()+70);
+      console.log(this.transfert);
+      this.clientService.emmettreTransfert(this.transfert).subscribe((response)=>{
+        setTimeout(() => {
+          this.message.remove(id);
+        }, 0);
+          this.startShowMessages(response);
+      },err=>{
+          this.message.error("Erreur d'envoi")
+      })
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -58,12 +96,28 @@ export class AjouterTransfertComponent implements OnInit {
       });
     }
   }
- 
+  startShowMessages(response:string): void {
+    
+        if(response == "Le transfert a été bien ajouté."){
+         this.message.success(response, { nzDuration: 1000 });
+         this.router.navigate(['/transfert/all'])
+
+        }else this.message.warning(response, { nzDuration: 2500 });
+         
+      
+  }
+  selectedBeneficiaire(value:string){
+    let benefName=value['nzValue'];
+     let nom = benefName.split(" ");
+   this.selectedBenef=this.selectedEmetteur.beneficiaires.find(i=>i.nom===nom[0]);
+
+  }
   onChange(value: string): void {
     this.filteredOptions = this.options.filter(option => option.toLowerCase().indexOf(value.toLowerCase()) !== -1);
   }
+  
   openCreateBenefComponent(): void {
-    this.drawerService.create<AjouterBeneficiaireComponent, { value: number | null }, string>({
+    const drawerRef = this.drawerService.create<AjouterBeneficiaireComponent, { value: number | null }>({
     nzTitle: 'Ajouter un bénéficiaire',
     nzContent: AjouterBeneficiaireComponent,
     nzMaskClosable:false,
@@ -71,6 +125,17 @@ export class AjouterTransfertComponent implements OnInit {
     nzContentParams: {
       value : null
     }
+  });
+  drawerRef.afterClose.subscribe((result) => {
+    this.beneficiaire=result;
+    this.selectedEmetteur.beneficiaires.push(this.beneficiaire);
+    console.log(this.selectedEmetteur.beneficiaires)
+    for(var benef of this.selectedEmetteur.beneficiaires){
+      this.options.push(benef.nom+" "+benef.prenom);
+    }
+    this.clientService.updateEmetteur(this.selectedEmetteur).subscribe(response=>{
+      console.log(response);
+    })
   });
 }
 showModal(): void {
@@ -101,10 +166,13 @@ createComponentModal(): void {
   modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
   // Return a result when closed
   modal.afterClose.subscribe((result) =>{ 
-    this.selectedClient=result['result'],
+    this.selectedEmetteur=result['result'],
     this.validateForm.patchValue({
-      client:this.selectedClient.nom + " " + this.selectedClient.prenom
+      client:this.selectedEmetteur.nom + " " + this.selectedEmetteur.prenom
     })
+    for(var benef of this.selectedEmetteur.beneficiaires){
+      this.options.push(benef.nom + " " +benef.prenom);
+    }
   }
   );
 

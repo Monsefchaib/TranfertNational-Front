@@ -4,11 +4,11 @@ import { Transfert } from 'src/app/model/Transfert.model';
 import { ClientServiceService } from 'src/app/services/client-service.service';
 
 @Component({
-  selector: 'app-afficher-transferts',
-  templateUrl: './afficher-transferts.component.html',
-  styleUrls: ['./afficher-transferts.component.css']
+  selector: 'app-bloquer-transfert',
+  templateUrl: './bloquer-transfert.component.html',
+  styleUrls: ['./bloquer-transfert.component.css']
 })
-export class AfficherTransfertsComponent implements OnInit {
+export class BloquerTransfertComponent implements OnInit {
   transfert:Transfert = new Transfert();
   constructor(private message: NzMessageService,private clientService:ClientServiceService) { }
 
@@ -41,8 +41,23 @@ export class AfficherTransfertsComponent implements OnInit {
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
+    const id = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+    setTimeout(() => {
+      this.message.remove(id);
+    }, 2500);
+
+    this.clientService.bloquerTranfert(this.transfert).subscribe((response)=>{
+      console.log(response);
+      setTimeout(() => {
+        this.message.remove(id);
+      }, 0)
+      this.startShowMessages(response);
+      window.location.reload();
+    },err=>{
+        this.message.error("Erreur d'envoi")
+    }
+      )
+    this.isVisible2 = false;    this.isVisible = false;
   }
 
   handleCancel(): void {
@@ -61,37 +76,34 @@ export class AfficherTransfertsComponent implements OnInit {
       this.message.remove(id);
     }, 2500);
 
-    this.clientService.restituerTransfert(this.transfert).subscribe((response)=>{
+    this.clientService.debloquerTranfert(this.transfert).subscribe((response)=>{
       setTimeout(() => {
         this.message.remove(id);
       }, 0)
-      this.startShowMessages(response);
+      this.startShowMessages2(response);
       window.location.reload();
+
     },err=>{
         this.message.error("Erreur d'envoi")
     }
       )
     this.isVisible2 = false;
   }
-  startShowMessages(response:string): void {
+  startShowMessages2(response:string): void {
     
-    if(response == "Le transfert a été restitué"){
+    if(response == "Le transfert est débloqué."){
      this.message.success(response, { nzDuration: 2000 });
 
     }else this.message.warning(response, { nzDuration: 2500 });
-     
-  
 }
-startShowMessagesExtourne(response:string): void {
+startShowMessages(response:string): void {
     
-  if(response == "Le transfert a été bien extourné"){
+  if(response == "Le transfert est bloqué."){
    this.message.success(response, { nzDuration: 2000 });
-   window.location.reload();
 
   }else this.message.warning(response, { nzDuration: 2500 });
-   
-
 }
+
   handleCancel2(): void {
     console.log('Button cancel clicked!');
     this.isVisible2 = false;
@@ -102,32 +114,6 @@ startShowMessagesExtourne(response:string): void {
     this.listOfDisplayData = this.listOfData.filter((item) => item.age.indexOf(this.searchValue) !== -1);
   }
 
-  handleCancel3(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible3= false;
-  }
+ 
 
-  showModal3(transfert:Transfert): void {
-    this.transfert=transfert;
-    this.isVisible3 = true;
-  }
-
-  handleOk3(): void {
-    const id = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
-    setTimeout(() => {
-      this.message.remove(id);
-    }, 2500);
-
-    this.clientService.extournerTranfert(this.transfert).subscribe((response)=>{
-      console.log(response);
-      setTimeout(() => {
-        this.message.remove(id);
-      }, 0)
-      this.startShowMessagesExtourne(response);
-    },err=>{
-        this.message.error("Erreur d'envoi")
-    }
-      )
-    this.isVisible2 = false;
-  }
 }

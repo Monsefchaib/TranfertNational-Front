@@ -4,18 +4,20 @@ import { AfficherTransfertsComponent } from './afficher-transferts/afficher-tran
 import { RouterModule, Routes } from '@angular/router';
 import { NzModule } from 'src/app/Shared/nz/nz.module';
 import { AjouterTransfertComponent } from './ajouter-transfert/ajouter-transfert.component';
+import { BloquerTransfertComponent } from './bloquer-transfert/bloquer-transfert.component';
 
 const routes: Routes = [
   {path : "all" , component : AfficherTransfertsComponent},
   {path : "add" , component : AjouterTransfertComponent},
-
+  {path : "bloquer" , component : BloquerTransfertComponent},
 
 ];
 
 @NgModule({
   declarations: [
     AfficherTransfertsComponent,
-    AjouterTransfertComponent
+    AjouterTransfertComponent,
+    BloquerTransfertComponent
   ],
   imports: [
     NzModule,

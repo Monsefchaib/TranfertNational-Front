@@ -8,7 +8,7 @@ import { LieuDeTravail } from "./LieuDeTravail.model"
 import { TransfertMultiple } from "./TransfertMultiple.model";
 
 export class Transfert{
-    //id:number=0;
+    id:number=0;
     reference:String="";
     codePin:String="";
     type:TypeTransfert=TypeTransfert.en_especes;
@@ -28,6 +28,7 @@ export class Transfert{
     beneficiaire?:Beneficiaire;
     motif:MotifTransfert=MotifTransfert.Frais_de_dépassement;
     transfertMultiple?:TransfertMultiple;
+    notification:boolean=false;
     lieuDeService?:LieuDeTravail;
     lieuDeDemande?:LieuDeTravail;
 }

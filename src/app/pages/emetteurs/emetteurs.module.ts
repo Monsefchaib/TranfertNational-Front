@@ -8,6 +8,7 @@ import { AjouterEmetteurComponent } from './ajouter-emetteur/ajouter-emetteur.co
 
 const routes: Routes = [
   {path : "all" , component : AfficherEmetteursComponent},
+  {path : "add" , component : AjouterEmetteurComponent},
 
 ];
 

@@ -11,7 +11,7 @@ export class Client{
     piece_identite?:PieceIdentite;
     comptes?: Array<Compte>;
     type:TypeClient=TypeClient.partenaire;
-    sexe:Sexe=Sexe.Mme;
+    sexe:Sexe=Sexe.M;
     profession:String="";
     pays_d_adresse:String="Maroc";
     adresselegale:String="";

@@ -1,17 +1,12 @@
 <h3>Liste des transferts:</h3>
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Servir le transfert" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Bloquer le transfert" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
-    <h3>Êtes-vous sûr de vouloir servir le transfert ?</h3>
+    <h3>Êtes-vous sûr de vouloir bloquer le transfert ?</h3>
   </ng-container>
 </nz-modal>
-<nz-modal [(nzVisible)]="isVisible3" nzTitle="Extourner le transfert" (nzOnCancel)="handleCancel3()" (nzOnOk)="handleOk3()">
+<nz-modal [(nzVisible)]="isVisible2" nzTitle="Debloquer le transfert" (nzOnCancel)="handleCancel2()" (nzOnOk)="handleOk2()">
   <ng-container *nzModalContent>
-    <h3>Êtes-vous sûr de vouloir servir le transfert ?</h3>
-  </ng-container>
-</nz-modal>
-<nz-modal [(nzVisible)]="isVisible2" nzTitle="Restituer le transfert" (nzOnCancel)="handleCancel2()" (nzOnOk)="handleOk2()">
-  <ng-container *nzModalContent>
-    <h3>Êtes-vous sûr de vouloir restituer le transfert ?</h3>
+    <h3>Êtes-vous sûr de vouloir debloquer le transfert ?</h3>
   </ng-container>
 </nz-modal>
   <nz-table #nzTable  nzShowPagination nzShowSizeChanger
@@ -35,6 +30,8 @@
                 <i nz-icon nzType="search"></i>
               </nz-filter-trigger>
         </th>
+        <th>Date de bloquage</th>
+        <th>Date de debloquage</th>
         <th>Etat</th>
         <th>Montant d'operation</th>
         <th>Montant transfert</th>
@@ -52,6 +49,8 @@
         <td>{{ data.reference }}</td>
         <td>{{data.date_demission|date:'d MMMM y'}}</td>
         <td>{{data.delai_de_validite|date:'d MMMM y'}}</td>
+        <td>{{data.date_de_blocage|date:'d MMMM y'}}</td>
+        <td>{{data.date_de_deblocage|date:'d MMMM y'}}</td>
         <td>{{data.etat}}</td>
         <td>{{data.montant_operation}}</td>
         <td>{{data.montant_transfert}}</td>
@@ -59,12 +58,9 @@
         <td>{{data.emetteur.nom}} {{data.emetteur.prenom}}</td>
         <td>{{data.beneficiaire.nom}} {{data.beneficiaire.prenom}}</td>
         <td>{{data.type}}</td>
-        <td><div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal(data)">Servir</a></div>
+        <td><div *ngIf="data.etat=='à_servir'"><a (click)="showModal(data)">Bloquer</a></div>
           <nz-divider nzType="vertical"></nz-divider>
-           <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal2(data)">Restituer</a></div>
-           <nz-divider nzType="vertical"></nz-divider>
-           <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal3(data)">Extourner</a></div>
-
+           <div *ngIf="data.etat=='bloque'"><a (click)="showModal2(data)">Debloquer</a></div>
           </td>
       </tr>
     </tbody>

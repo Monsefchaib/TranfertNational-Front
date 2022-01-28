@@ -6,6 +6,7 @@ import { Beneficiaire } from '../model/Beneficiare.model';
 import { CarteDeCredit } from '../model/CarteDeCredit.model';
 import { Client } from '../model/Client.model';
 import { Emetteur } from '../model/Emetteur.model';
+import { TypeTransfert } from '../model/enums/TypeTransfert.model';
 import { GichetABillet } from '../model/GichetABillet.model';
 import { PointDeVente } from '../model/PointDeVente.model';
 import { Transfert } from '../model/Transfert.model';
@@ -80,6 +81,36 @@ export class ClientServiceService {
   }
   public addTransfert(client:Transfert){
     return this.http.post("http://localhost:1945/add_Transfert/",client);
+  }
+
+  public updateEmetteur(client:Emetteur){
+    return this.http.put(`http://localhost:1945/update_Emetteur/${client.idClient}`,client);
+  }
+  
+  public emmettreTransfert(transfert:Transfert){
+    console.log(transfert.type);
+    if(transfert.type.toString()=='en_especes'){
+      console.log('en espece')
+     return this.http.put(`http://localhost:9000/fromAgentAccount/`,transfert,{ responseType: 'text' });
+    }else{
+      console.log('debit de compte')
+    return this.http.put(`http://localhost:9000/fromClientAccount/`,transfert,{ responseType: 'text' });
+
+    } 
+  }
+
+  public bloquerTranfert(transfert:Transfert){
+    return this.http.get(`http://localhost:8000/bloquer_transfert/${transfert.id}`,{responseType: 'text'} )
+  }
+  public debloquerTranfert(transfert:Transfert){
+    return this.http.get(`http://localhost:8000/debloquer_transfert/${transfert.id}`,{responseType: 'text'} )
+  }
+  public restituerTransfert(transfert:Transfert){
+    return this.http.get(`http://localhost:8000/restituer_transfert/${transfert.id}`,{responseType: 'text'} )
+  }
+
+  public extournerTranfert(transfert:Transfert){
+    return this.http.get(`http://localhost:8000/extourner_transfert/${transfert.id}`,{responseType: 'text'} )
   }
 
 }

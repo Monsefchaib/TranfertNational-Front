@@ -4,10 +4,13 @@ import { AgentsComponent } from './agents/agents.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NzModule } from 'src/app/Shared/nz/nz.module';
 import { AjouterAgentComponent } from './ajouter-agent/ajouter-agent.component';
+import { BloquerTransfertComponent } from '../transfert/bloquer-transfert/bloquer-transfert.component';
 
 const routes: Routes = [
   {path : "all" , component : AgentsComponent},
   {path : "add" , component : AjouterAgentComponent},
+  {path : "bloquer" , component : BloquerTransfertComponent},
+
 
 ];
 
