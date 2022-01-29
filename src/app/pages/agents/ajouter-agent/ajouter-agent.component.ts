@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { ToastrService } from 'ngx-toastr';
 import { Agent } from 'src/app/model/Agent.model';
 import { CarteDeCredit } from 'src/app/model/CarteDeCredit.model';
@@ -61,11 +63,15 @@ export class AjouterAgentComponent implements OnInit {
   };
 
 
-  constructor(private clientService:ClientServiceService,private fb: FormBuilder) {}
+  constructor(private router: Router,private clientService:ClientServiceService,private fb: FormBuilder,private message: NzMessageService) {}
   ajouterCompte(){
     this.nbrComptes++;
   }
   ajouter(){
+    const id = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+      setTimeout(() => {
+        this.message.remove(id);
+      }, 2500);
     const agentValue=this.agentForm?.value;
     this.agent.nom=agentValue['nom'];
     this.agent.prenom=agentValue['prenom'];
@@ -123,9 +129,15 @@ export class AjouterAgentComponent implements OnInit {
     }
     console.log(this.agent);
     this.clientService.addAgent(this.agent).subscribe((d)=>{
-      console.log("rerponse"+d);
+      setTimeout(() => {
+        this.message.remove(id);
+      }, 0);
+        this.message.success('Emetteur ajouté avec succès');
+        this.router.navigate(['dashboard/agent/all'])
+
+    },err=>{
+        this.message.error("Erreur d'envoi")
     })
-    // this.thoast.success("agent Ajouté","Succes")
 }
   ngOnInit(): void {
     this.agentForm = this.fb.group({

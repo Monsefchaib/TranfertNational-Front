@@ -100,7 +100,7 @@ export class AjouterTransfertComponent implements OnInit {
     
         if(response == "Le transfert a été bien ajouté."){
          this.message.success(response, { nzDuration: 1000 });
-         this.router.navigate(['/transfert/all'])
+         this.router.navigate(['dashboard/transfert/all'])
 
         }else this.message.warning(response, { nzDuration: 2500 });
          

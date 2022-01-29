@@ -94,13 +94,15 @@ export class ClientServiceService {
   }
   
   public emmettreTransfert(transfert:Transfert){
+    var getUser = sessionStorage.getItem("user");
+    this.clientRes=JSON.parse(getUser);
     console.log(transfert.type);
     if(transfert.type.toString()=='en_especes'){
       console.log('en espece')
-     return this.http.put(`http://localhost:9000/fromAgentAccount/`,transfert,{ responseType: 'text' });
+     return this.http.put(`http://localhost:9000/fromAgentAccount/${this.clientRes.idClient}`,transfert,{ responseType: 'text' });
     }else{
       console.log('debit de compte')
-    return this.http.put(`http://localhost:9000/fromClientAccount/`,transfert,{ responseType: 'text' });
+    return this.http.put(`http://localhost:9000/fromClientAccount/${this.clientRes.idClient}`,transfert,{ responseType: 'text' });
 
     } 
   }

@@ -6,7 +6,7 @@
 </nz-modal>
 <nz-modal [(nzVisible)]="isVisible3" nzTitle="Extourner le transfert" (nzOnCancel)="handleCancel3()" (nzOnOk)="handleOk3()">
   <ng-container *nzModalContent>
-    <h3>Êtes-vous sûr de vouloir servir le transfert ?</h3>
+    <h3>Êtes-vous sûr de vouloir extourner le transfert ?</h3>
   </ng-container>
 </nz-modal>
 <nz-modal [(nzVisible)]="isVisible2" nzTitle="Restituer le transfert" (nzOnCancel)="handleCancel2()" (nzOnOk)="handleOk2()">
@@ -60,10 +60,13 @@
         <td>{{data.beneficiaire.nom}} {{data.beneficiaire.prenom}}</td>
         <td>{{data.type}}</td>
         <td><div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal(data)">Servir</a></div>
-          <nz-divider nzType="vertical"></nz-divider>
-          <div *ngIf="data.agent.id==client.id">
-           <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal2(data)">Restituer</a></div>
+          <div *ngIf="data.agent.idClient==client.idClient">
+         
+           <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'">
+            <nz-divider nzType="vertical"></nz-divider> 
+            <a (click)="showModal2(data)">Restituer</a>
            <nz-divider nzType="vertical"></nz-divider>
+          </div>
            <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal3(data)">Extourner</a></div>
           </div>
           </td>

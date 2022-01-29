@@ -131,7 +131,7 @@ export class AjouterEmetteurComponent implements OnInit {
           this.message.remove(id);
         }, 0);
           this.message.success('Emetteur ajouté avec succès');
-          this.router.navigate(['/emetteur/all'])
+          this.router.navigate(['dashboard/emetteur/all'])
 
       },err=>{
           this.message.error("Erreur d'envoi")

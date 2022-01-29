@@ -11,11 +11,12 @@ import { ClientServiceService } from 'src/app/services/client-service.service';
 export class HomeComponent implements OnInit {
   isCollapsed = false;
   client:Client = new Client();
-  constructor(private authService:AuthentificationService) { }
+  constructor(private clientService:ClientServiceService,private authService:AuthentificationService) { }
 
   ngOnInit(): void {
     var getUser = sessionStorage.getItem("user");
       this.client=JSON.parse(getUser);
+  
   }
 
   log(): void {

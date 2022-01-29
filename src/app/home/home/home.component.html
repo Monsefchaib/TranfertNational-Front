@@ -19,7 +19,7 @@
               </li>
             </ul>
           </li>
-          <div *ngIf="client.role=='agent'">
+          <div *ngIf="client.role=='agent' || client.role=='admin'">
         <li nz-submenu nzOpen nzTitle="Transferts" nzIcon="send">
           <ul>
             <li nz-menu-item nzMatchRouter>
