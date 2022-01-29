@@ -18,6 +18,7 @@ export class Client{
     email:String="";
     wallet?:Wallet;
     ville:String="";
+    role:String="";
     
 
 }

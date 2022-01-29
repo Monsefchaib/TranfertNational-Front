@@ -14,6 +14,7 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { HomeModule } from './home/home.module';
 
 registerLocaleData(fr);
 
@@ -22,6 +23,7 @@ registerLocaleData(fr);
     AppComponent
   ],
   imports: [
+    HomeModule,
     NzDropDownModule,
     BrowserModule,
     AppRoutingModule,

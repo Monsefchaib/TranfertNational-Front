@@ -16,8 +16,14 @@ import { Transfert } from '../model/Transfert.model';
   providedIn: 'root'
 })
 export class ClientServiceService {
+  clientRes:Client = new Client();
 
   constructor(private http:HttpClient) { }
+
+  ngOnInit(): void {
+    var getUser = sessionStorage.getItem("user");
+      this.clientRes=JSON.parse(getUser);
+  }
 
   public getClients(){
     return this.http.get("http://localhost:1945/get_clients");
@@ -29,7 +35,7 @@ export class ClientServiceService {
     return this.http.get("http://localhost:1945/get_Beneficiaires");
   }
   public getAgents(){
-    return this.http.get("http://localhost:1945/get_Agents");
+    return this.http.get("http://localhost:3000/api/B");
   }
   public getEmetteurs(){
     return this.http.get("http://localhost:1945/get_Emetteurs");
@@ -113,4 +119,11 @@ export class ClientServiceService {
     return this.http.get(`http://localhost:8000/extourner_transfert/${transfert.id}`,{responseType: 'text'} )
   }
 
+  public login(client:Client){
+    return this.http.post(`http://localhost:3000/login`,client)
+  }
+
+  public logout(){
+    return this.http.get(`http://localhost:3000/logout`)
+  }
 }

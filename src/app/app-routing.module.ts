@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home/home.component';
 import { LoginPageComponent } from './pages/login/login-page/login-page.component';
+import { AuthentificationService } from './services/authentification.service';
 
 const routes: Routes = [
-  { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) },
-  { path: 'ajouterTransfert', loadChildren: () => import('./pages/ajouter-transfert/ajouter-transfert.module').then(m => m.AjouterTransfertModule) },
+  { path: '', loadChildren: () => import('../app/pages/login/login.module').then(m => m.LoginModule) },
+  {path:'dashboard',component:HomeComponent, canActivate: [AuthentificationService],children:[
+    { path: 'ajouterTransfert', loadChildren: () => import('./pages/ajouter-transfert/ajouter-transfert.module').then(m => m.AjouterTransfertModule) },
   { path: 'ajouterBeneficiaire', loadChildren: () => import('./pages/ajouter-beneficiaire/ajouter-beneficiaire.module').then(m => m.AjouterBeneficiaireModule) },
   { path: 'searchClient', loadChildren: () => import('./pages/chercherClient/search-client/search-client.module').then(m => m.SearchClientModule) },
   { path: 'agents', loadChildren: () => import('./pages/agents/agents.module').then(m => m.AgentsModule) },
@@ -17,6 +20,9 @@ const routes: Routes = [
   { path: 'pointvente', loadChildren: () => import('./pages/point-vente/point-vente.module').then(m => m.PointVenteModule) },
   { path: 'wallet', loadChildren: () => import('./pages/wallet/wallet.module').then(m => m.WalletModule) },
   { path: 'transfert', loadChildren: () => import('./pages/transfert/transfert.module').then(m => m.TransfertModule) },
+  { path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
+
+  ]},
 
 
 ];

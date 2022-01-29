@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Client } from 'src/app/model/Client.model';
 import { Transfert } from 'src/app/model/Transfert.model';
 import { ClientServiceService } from 'src/app/services/client-service.service';
 
@@ -10,9 +11,13 @@ import { ClientServiceService } from 'src/app/services/client-service.service';
 })
 export class AfficherTransfertsComponent implements OnInit {
   transfert:Transfert = new Transfert();
+  client:Client = new Client();
+
   constructor(private message: NzMessageService,private clientService:ClientServiceService) { }
 
   ngOnInit() {
+    var getUser = sessionStorage.getItem("user");
+    this.client=JSON.parse(getUser);
     let resp=this.clientService.getTransferts();
     resp.subscribe((data :Transfert[])=>{
       console.log(data);
@@ -38,6 +43,7 @@ export class AfficherTransfertsComponent implements OnInit {
   showModal(transfert:Transfert): void {
     this.transfert=transfert;
     this.isVisible = true;
+    
   }
 
   handleOk(): void {

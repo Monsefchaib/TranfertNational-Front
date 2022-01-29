@@ -1,0 +1,17 @@
+<div  nz-row>
+    <div *ngIf="client.role!='admin'" nz-col nzSpan="12">
+        <nz-card style="width:300px;" nzTitle="Solde disponible" [nzExtra]="extraTemplate">
+            <h3>{{client.comptes[0].montant}} Dhs</h3>
+          </nz-card>
+          <ng-template #extraTemplate>
+          </ng-template>
+    </div>
+    <div nz-col nzSpan="12">
+        <nz-card style="width:300px;" nzTitle="Type" [nzExtra]="extraTemplate">
+            <h3>{{client.role}}</h3>
+          </nz-card>
+          <ng-template #extraTemplate>
+          </ng-template>
+
+    </div>
+  </div>

@@ -61,10 +61,11 @@
         <td>{{data.type}}</td>
         <td><div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal(data)">Servir</a></div>
           <nz-divider nzType="vertical"></nz-divider>
+          <div *ngIf="data.agent.id==client.id">
            <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal2(data)">Restituer</a></div>
            <nz-divider nzType="vertical"></nz-divider>
            <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal3(data)">Extourner</a></div>
-
+          </div>
           </td>
       </tr>
     </tbody>
