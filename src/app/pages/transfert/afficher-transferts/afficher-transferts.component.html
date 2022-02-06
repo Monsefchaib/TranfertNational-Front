@@ -26,14 +26,10 @@
         <th nzCustomFilter>
             
           Date d'emission
-          <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
+   
         </th>
         <th>Delai de validite
-            <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-                <i nz-icon nzType="search"></i>
-              </nz-filter-trigger>
+       
         </th>
         <th>Etat</th>
         <th>Montant d'operation</th>
@@ -59,14 +55,14 @@
         <td>{{data.emetteur.nom}} {{data.emetteur.prenom}}</td>
         <td>{{data.beneficiaire.nom}} {{data.beneficiaire.prenom}}</td>
         <td>{{data.type}}</td>
-        <td><div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal(data)">Servir</a></div>
+        <td><div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal(data)">Servir</a>
+        </div>
+          
           <div *ngIf="data.agent.idClient==client.idClient">
-         
            <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'">
-            <nz-divider nzType="vertical"></nz-divider> 
             <a (click)="showModal2(data)">Restituer</a>
-           <nz-divider nzType="vertical"></nz-divider>
           </div>
+          
            <div *ngIf="data.etat=='à_servir'|| data.etat=='débloqué_a_servir'"><a (click)="showModal3(data)">Extourner</a></div>
           </div>
           </td>
@@ -76,7 +72,7 @@
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <div class="ant-table-filter-dropdown">
       <div class="search-box">
-        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+        <input type="text" nz-input placeholder="Chercher reference" [(ngModel)]="searchValue" />
         <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
         <button nz-button nzSize="small" (click)="reset()">Reset</button>
       </div>

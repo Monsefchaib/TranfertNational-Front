@@ -47,8 +47,26 @@ export class AfficherTransfertsComponent implements OnInit {
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
+    const id = this.message.loading('Action in progress..', { nzDuration: 0 }).messageId;
+    setTimeout(() => {
+      this.message.remove(id);
+    }, 2500);
+
+    this.clientService.servirTransfert(this.transfert).subscribe((response)=>{
+      setTimeout(() => {
+        this.message.remove(id);
+      }, 0)
+      if(response == "Le transfert a été bien servi"){
+        this.message.success(response, { nzDuration: 2000 });
+   
+       }else this.message.warning(response, { nzDuration: 2500 });
+      this.startShowMessages(response);
+      window.location.reload();
+    },err=>{
+        this.message.error("Erreur d'envoi")
+    }
+      )
+    this.isVisible2 = false;
   }
 
   handleCancel(): void {
@@ -105,7 +123,7 @@ startShowMessagesExtourne(response:string): void {
 
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item) => item.age.indexOf(this.searchValue) !== -1);
+    this.listOfDisplayData = this.listOfData.filter((item) => item.reference.indexOf(this.searchValue) !== -1);
   }
 
   handleCancel3(): void {

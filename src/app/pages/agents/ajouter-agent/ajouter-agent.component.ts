@@ -132,7 +132,7 @@ export class AjouterAgentComponent implements OnInit {
       setTimeout(() => {
         this.message.remove(id);
       }, 0);
-        this.message.success('Emetteur ajouté avec succès');
+        this.message.success('Agent ajouté avec succès');
         this.router.navigate(['dashboard/agent/all'])
 
     },err=>{

@@ -10,6 +10,7 @@ import { TypeTransfert } from '../model/enums/TypeTransfert.model';
 import { GichetABillet } from '../model/GichetABillet.model';
 import { PointDeVente } from '../model/PointDeVente.model';
 import { Transfert } from '../model/Transfert.model';
+import { TransfertMultiple } from '../model/TransfertMultiple.model';
 
 
 @Injectable({
@@ -127,5 +128,13 @@ export class ClientServiceService {
 
   public logout(){
     return this.http.get(`http://localhost:3000/logout`)
+  }
+
+  public addTransfertM(client:TransfertMultiple){
+    return this.http.post("http://localhost:1945/add_TransfertMultiple/",client);
+  }
+
+  public servirTransfert(transfert:Transfert){
+    return this.http.post("http://localhost:9001/servir_transfert/",transfert,{responseType: 'text'});
   }
 }

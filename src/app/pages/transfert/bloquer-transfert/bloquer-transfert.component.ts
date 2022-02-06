@@ -111,7 +111,7 @@ startShowMessages(response:string): void {
 
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item) => item.age.indexOf(this.searchValue) !== -1);
+    this.listOfDisplayData = this.listOfData.filter((item) => item.reference.indexOf(this.searchValue) !== -1);
   }
 
  

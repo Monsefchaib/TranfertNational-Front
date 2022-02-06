@@ -28,6 +28,9 @@
             <li nz-menu-item nzMatchRouter>
               <a routerLink="transfert/add">Ajouter un transfert</a>
             </li>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="transfert/add-multiple">Ajouter un transfert multiple</a>
+            </li>
             <div *ngIf="client.role=='admin'">
             <li nz-menu-item nzMatchRouter>
               <a routerLink="transfert/bloquer">Bloquer un tranfert</a>
@@ -76,6 +79,9 @@
             </li>
           </ul>
         </li>
+      </div>
+      <div *ngIf="client.role=='admin' || client.role=='agent'">
+
         <li nz-submenu nzOpen nzTitle="Clients" nzIcon="user">
           <ul>
             <li nz-menu-item nzMatchRouter>
@@ -84,11 +90,11 @@
             <li nz-menu-item nzMatchRouter>
               <a routerLink="client/add">Ajouter client</a>
             </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>Afficher clients</a>
-            </li>
           </ul>
         </li>
+      </div>
+      <div *ngIf="client.role=='admin'">
+
         <li nz-submenu nzOpen nzTitle="Comptes" nzIcon="audit">
           <ul>
             <li nz-menu-item nzMatchRouter>
